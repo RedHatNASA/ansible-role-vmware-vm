@@ -1,7 +1,7 @@
 ---
 # tasks file for ansible-role-vmware-vm
 - name: Create a virtual machine from rhel8-template
-  vmware_guest:
+  community.vmware.vmware_guest:
     hostname: '{{ lookup("env", "VMWARE_HOST") }}'
     username: '{{ lookup("env", "VMWARE_USER") }}'
     password: '{{ lookup("env", "VMWARE_PASSWORD") }}'
@@ -30,6 +30,6 @@
   register: deploy
 
 - name: Create artifact of VM IP address
-  set_stats:
+  ansible.builtin.set_stats:
     data:
       vm_ip_addr: "{{ deploy.instance.ipv4 }}"
